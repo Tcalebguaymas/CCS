@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCS | Calvary • Cross • Salvation</title>
+
+    <!-- Google Fonts: Inter for clean, minimalist typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Custom Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        ccs: {
+                            black: '#0a0a0a',
+                            white: '#ffffff',
+                            brown: '#8b5a2b',
+                            lightgray: '#f5f5f5'
+                        }
+                    },
+                    transitionProperty: {
+                        'height': 'height',
+                        'spacing': 'margin, padding',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styles for animations and specifics */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #0a0a0a;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Hero text hover effect */
+        .hero-letter {
+            display: inline-block;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .hero-letter:hover {
+            color: #8b5a2b;
+            transform: translateY(-10px);
+        }
+
+        /* Product image hover scale */
+        .product-card group:hover .product-img {
+            transform: scale(1.05);
+        }
+
+        /* Hide scrollbar for clean look but keep functionality */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #8b5a2b;
+        }
+
+        /* Fade in animation for product items */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Sticky header shadow on scroll */
+        .sticky-shadow {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+
+<body class="bg-ccs-white text-ccs-black overflow-x-hidden selection:bg-ccs-brown selection:text-ccs-white">
+
+    <!-- Top Navigation (Absolute, transparent) -->
+    <header class="absolute top-0 left-0 w-full p-6 z-50 flex justify-between items-center">
+        <div class="text-xl font-black tracking-tighter cursor-pointer">CCS.</div>
+        <nav class="hidden md:flex gap-8 text-sm font-semibold uppercase tracking-widest">
+            <a href="#" class="hover:text-ccs-brown transition-colors">Shop</a>
+            <a href="#" class="hover:text-ccs-brown transition-colors">Colecciones</a>
+            <a href="#" class="hover:text-ccs-brown transition-colors">Nosotros</a>
+        </nav>
+        <div class="flex gap-4">
+            <button class="hover:text-ccs-brown transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                </svg>
+            </button>
+            <button class="hover:text-ccs-brown transition-colors relative">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                </svg>
+                <span
+                    class="absolute -top-1 -right-1 bg-ccs-brown text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="h-screen w-full flex flex-col justify-center items-center relative">
+        <!-- Main Interactive Title -->
+        <h1 class="text-[25vw] md:text-[20vw] leading-none font-black tracking-tight flex gap-4 md:gap-12 select-none">
+            <span class="hero-letter cursor-pointer" onclick="filterFromHero('calvary')" title="Ver Calvary">C</span>
+            <span class="hero-letter cursor-pointer" onclick="filterFromHero('cross')" title="Ver Cross">C</span>
+            <span class="hero-letter cursor-pointer" onclick="filterFromHero('salvation')"
+                title="Ver Salvation">S</span>
+        </h1>
+
+        <!-- Subtitle -->
+        <div class="mt-4 md:mt-8 flex flex-col items-center opacity-80">
+            <p class="text-xs md:text-sm uppercase tracking-[0.3em] md:tracking-[0.5em] font-semibold text-center px-4">
+                <span class="hover:text-ccs-brown transition-colors cursor-pointer"
+                    onclick="filterFromHero('calvary')">Calvary</span> &bull;
+                <span class="hover:text-ccs-brown transition-colors cursor-pointer"
+                    onclick="filterFromHero('cross')">Cross</span> &bull;
+                <span class="hover:text-ccs-brown transition-colors cursor-pointer"
+                    onclick="filterFromHero('salvation')">Salvation</span>
+            </p>
+            <p class="text-xs mt-6 md:mt-12 opacity-50 uppercase tracking-widest animate-pulse">Desliza para explorar
+            </p>
+        </div>
+    </section>
+
+    <!-- Shop Section -->
+    <section id="shop" class="min-h-screen bg-ccs-white relative">
+
+        <!-- Sticky Filter Bar -->
+        <div id="sticky-filter"
+            class="sticky top-0 bg-ccs-white/95 backdrop-blur-sm border-b border-gray-100 py-4 z-40 transition-all duration-300">
+            <div class="container mx-auto px-4 md:px-8">
+                <ul class="flex justify-start md:justify-center overflow-x-auto gap-8 text-sm uppercase tracking-widest font-semibold pb-2 md:pb-0 scrollbar-hide"
+                    id="filter-buttons">
+                    <li>
+                        <button
+                            class="filter-btn active pb-1 border-b-2 border-ccs-black whitespace-nowrap hover:text-ccs-brown transition-colors"
+                            data-filter="all">Todas</button>
+                    </li>
+                    <li>
+                        <button
+                            class="filter-btn pb-1 border-b-2 border-transparent text-gray-400 whitespace-nowrap hover:text-ccs-brown transition-colors"
+                            data-filter="calvary">Calvary</button>
+                    </li>
+                    <li>
+                        <button
+                            class="filter-btn pb-1 border-b-2 border-transparent text-gray-400 whitespace-nowrap hover:text-ccs-brown transition-colors"
+                            data-filter="cross">Cross</button>
+                    </li>
+                    <li>
+                        <button
+                            class="filter-btn pb-1 border-b-2 border-transparent text-gray-400 whitespace-nowrap hover:text-ccs-brown transition-colors"
+                            data-filter="salvation">Salvation</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="container mx-auto px-4 md:px-8 py-12 md:py-24">
+            <!-- Category Title (Dynamic) -->
+            <div class="mb-12 flex justify-between items-end">
+                <h2 id="category-title" class="text-3xl md:text-5xl font-black uppercase tracking-tighter">Colección
+                    Completa</h2>
+                <span id="product-count"
+                    class="text-sm font-semibold text-gray-500 uppercase tracking-widest hidden md:block">0
+                    Artículos</span>
+            </div>
+
+            <!-- Grid Container -->
+            <div id="product-grid"
+                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-12">
+                <!-- Products will be injected here by JavaScript -->
+            </div>
+
+            <!-- Empty State (Hidden by default) -->
+            <div id="empty-state" class="hidden py-24 flex flex-col items-center justify-center text-center">
+                <p class="text-2xl font-bold mb-4">No se encontraron artículos.</p>
+                <button onclick="filterProducts('all')"
+                    class="border border-ccs-black px-8 py-3 text-sm uppercase tracking-widest hover:bg-ccs-black hover:text-white transition-colors">Ver
+                    todas</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-ccs-black text-ccs-white py-16 mt-20">
+        <div class="container mx-auto px-4 md:px-8 grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div>
+                <h3 class="text-4xl font-black tracking-tighter mb-4">CCS.</h3>
+                <p class="text-gray-400 text-sm max-w-xs">Calvary, Cross, Salvation. Con bendición y propósito en cada
+                    prenda. Diseñado para impactar.</p>
+            </div>
+            <div class="flex flex-col gap-2 text-sm uppercase tracking-widest font-semibold text-gray-400">
+                <a href="#" class="hover:text-ccs-white transition-colors">Shop All</a>
+                <a href="#" class="hover:text-ccs-white transition-colors">Calvary</a>
+                <a href="#" class="hover:text-ccs-white transition-colors">Cross</a>
+                <a href="#" class="hover:text-ccs-white transition-colors">Salvation</a>
+            </div>
+            <div class="flex flex-col gap-2 text-sm uppercase tracking-widest font-semibold text-gray-400">
+                <a href="#" class="hover:text-ccs-white transition-colors">Shop All</a>
+                <a href="#" class="hover:text-ccs-white transition-colors">Crecimiento</a>
+                <a href="#" class="hover:text-ccs-white transition-colors">Cruz</a>
+                <a href="#" class="hover:text-ccs-white transition-colors">Salvación</a>
+            </div>
+            <div class="flex flex-col gap-2 text-sm uppercase tracking-widest font-semibold text-gray-400">
+                <a href="#" class="hover:text-ccs-white transition-colors">Instagram</a>
+                <a href="#" class="hover:text-ccs-white transition-colors">Términos</a>
+                <a href="#" class="hover:text-ccs-white transition-colors">Envíos</a>
+                <a href="#" class="hover:text-ccs-white transition-colors">Contacto</a>
+            </div>
+        </div>
+        <div
+            class="container mx-auto px-4 md:px-8 mt-16 pt-8 border-t border-gray-800 text-xs text-gray-600 uppercase tracking-widest flex flex-col md:flex-row justify-between items-center gap-4">
+            <p>&copy; 2026 CCS Clothing. Todos los derechos reservados.</p>
+            <p>Diseñado con propósito.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- 1. Product Database ---
+        // Using high-quality minimalist clothing placeholders from Unsplash
+        const products = [
+            {
+                id: 1,
+                name: "Até Que Ele Venha - Oversize",
+                category: "calvary",
+                price: "$25.000",
+                image: "imagenes/remera-oversize (2).jpg",
+                tag: "Nuevo"
+            },
+            {
+                id: 2,
+                name: "Proverbs 3:5-6 - Oversize",
+                category: "calvary",
+                price: "$25.000",
+                image: "imagenes/remera-oversize (3).jpg",
+                tag: null
+            },
+            {
+                id: 3,
+                name: "70 X 7 Mateus - Oversize",
+                category: "calvary",
+                price: "$25.000",
+                image: "imagenes/remera-oversize (1).jpg",
+                tag: "Best Seller"
+            },
+            {
+                id: 4,
+                name: "God Has A Plan",
+                category: "cross",
+                price: "$22.000",
+                image: "imagenes/remeras-cross (1).jpg",
+                tag: null
+            },
+            {
+                id: 5,
+                name: "Ezekiel 36:26",
+                category: "cross",
+                price: "$24.000",
+                image: "imagenes/remeras-cross (2).jpg",
+                tag: null
+            },
+            {
+                id: 6,
+                name: "God Has A Plan Acid Wash",
+                category: "salvation",
+                price: "$28.000",
+                image: "imagenes/remeras-salvation (4).jpg",
+                tag: "Nuevo"
+            },
+            {
+                id: 7,
+                name: "No Weapon Formed",
+                category: "salvation",
+                price: "$26.000",
+                image: "imagenes/remeras-salvation (5).jpg",
+                tag: null
+            },
+            {
+                id: 8,
+                name: "Worship LA",
+                category: "salvation",
+                price: "$26.000",
+                image: "imagenes/remeras-salvation (1).jpg",
+                tag: null
+            },
+            {
+                id: 9,
+                name: "Faith Grace",
+                category: "salvation",
+                price: "$26.000",
+                image: "imagenes/remeras-salvation (2).jpg",
+                tag: null
+            },
+            {
+                id: 10,
+                name: "Cross Crown",
+                category: "salvation",
+                price: "$26.000",
+                image: "imagenes/remeras-salvation (3).jpg",
+                tag: null
+            }
+        ];
+
+        // --- 2. DOM Elements ---
+        const gridContainer = document.getElementById('product-grid');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const categoryTitle = document.getElementById('category-title');
+        const productCount = document.getElementById('product-count');
+        const emptyState = document.getElementById('empty-state');
+        const stickyFilter = document.getElementById('sticky-filter');
+
+        // Titles for categories
+        const categoryTitles = {
+            'all': 'Colección Completa',
+            'calvary': 'Línea Calvary (Oversize)',
+            'cross': 'Línea Cross (Mujer)',
+            'salvation': 'Línea Salvation (Unisex)'
+        };
+
+        // --- 3. Render Function ---
+        function renderProducts(category = 'all') {
+            // Filter logic
+            const filteredProducts = category === 'all'
+                ? products
+                : products.filter(product => product.category === category);
+
+            // Update Headers
+            categoryTitle.textContent = categoryTitles[category];
+            productCount.textContent = `${filteredProducts.length} Artículo${filteredProducts.length !== 1 ? 's' : ''}`;
+
+            // Clear Grid
+            gridContainer.innerHTML = '';
+
+            if (filteredProducts.length === 0) {
+                gridContainer.classList.add('hidden');
+                emptyState.classList.remove('hidden');
+                return;
+            } else {
+                gridContainer.classList.remove('hidden');
+                emptyState.classList.add('hidden');
+            }
+
+            // Generate HTML for each product
+            filteredProducts.forEach((product, index) => {
+                const productHTML = `
+                    <div class="group cursor-pointer flex flex-col fade-in" style="animation-delay: ${index * 0.05}s">
+                        <!-- Image Container with aspect ratio -->
+                        <div class="relative w-full aspect-[3/4] overflow-hidden bg-ccs-lightgray mb-4">
+                            <img 
+                                src="${product.image}" 
+                                alt="${product.name}" 
+                                class="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+                                loading="lazy"
+                            >
+                            ${product.tag ? `<div class="absolute top-4 left-4 bg-ccs-black text-white text-[10px] uppercase tracking-widest px-2 py-1 font-bold">${product.tag}</div>` : ''}
+                            
+                            <!-- Quick add overlay (appears on hover) -->
+                            <div class="absolute inset-x-0 bottom-0 p-4 opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                                <button class="w-full bg-white text-ccs-black py-3 text-sm font-semibold uppercase tracking-wider hover:bg-ccs-brown hover:text-white transition-colors shadow-lg">
+                                    Añadir al carrito
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Product Info -->
+                        <div class="flex justify-between items-start mt-2">
+                            <div>
+                                <h3 class="text-sm font-bold tracking-tight text-ccs-black group-hover:text-ccs-brown transition-colors">${product.name}</h3>
+                                <p class="text-xs text-gray-500 uppercase tracking-widest mt-1">${product.category}</p>
+                            </div>
+                            <span class="text-sm font-semibold">${product.price}</span>
+                        </div>
+                    </div>
+                `;
+                gridContainer.insertAdjacentHTML('beforeend', productHTML);
+            });
+        }
+
+        // --- 4. Filtering Logic ---
+        function updateActiveButton(selectedCategory) {
+            filterButtons.forEach(btn => {
+                if (btn.getAttribute('data-filter') === selectedCategory) {
+                    btn.classList.add('border-ccs-black', 'text-ccs-black', 'active');
+                    btn.classList.remove('border-transparent', 'text-gray-400');
+                } else {
+                    btn.classList.remove('border-ccs-black', 'text-ccs-black', 'active');
+                    btn.classList.add('border-transparent', 'text-gray-400');
+                }
+            });
+        }
+
+        function filterProducts(category) {
+            updateActiveButton(category);
+            renderProducts(category);
+        }
+
+        // --- 5. Event Listeners ---
+
+        // Sticky bar button clicks
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const category = e.target.getAttribute('data-filter');
+                filterProducts(category);
+
+                // If scrolling from very bottom, smooth scroll slightly up to header
+                const shopSection = document.getElementById('shop');
+                const headerOffset = 80;
+                const elementPosition = shopSection.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                // Only scroll if we are below the shop section start
+                if (window.scrollY > offsetPosition + 200) {
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+                }
+            });
+        });
+
+        // Hero Letters Clicks
+        // Attached to the window object so inline onclick handlers can access it
+        window.filterFromHero = function (category) {
+            filterProducts(category);
+
+            // Smooth scroll to shop section
+            const shopSection = document.getElementById('shop');
+            const stickyHeight = stickyFilter.offsetHeight; // Get sticky header height
+
+            const targetPosition = shopSection.getBoundingClientRect().top + window.pageYOffset - stickyHeight;
+
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+        };
+
+        // Scroll listener for sticky header shadow
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > window.innerHeight - 50) {
+                stickyFilter.classList.add('sticky-shadow');
+            } else {
+                stickyFilter.classList.remove('sticky-shadow');
+            }
+        });
+
+        // --- 6. Initialization ---
+        // Render all products initially
+        renderProducts('all');
+
+    </script>
+</body>
+
+</html>
